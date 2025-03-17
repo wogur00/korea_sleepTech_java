@@ -8,12 +8,12 @@ import user_reservation.repository.ReservationRepository;
 import user_reservation.service.ReservationService;
 
 public class ReservationServiceImpl implements ReservationService {
-	private final ReservationRepository reservationRepository;
+	private final ReservationRepository reservationRespository;
 	private final UserServiceImpl userServiceImpl;
 	private long reservationIdSequence;
 	
 	public ReservationServiceImpl(UserServiceImpl userServiceImpl) {
-		this.reservationRepository = new ReservationRepository();
+		this.reservationRespository = new ReservationRepository();
 		this.userServiceImpl = userServiceImpl;
 	}
 
@@ -22,7 +22,7 @@ public class ReservationServiceImpl implements ReservationService {
 		if (userServiceImpl.isLoggedIn()) {
 			Date reservationTime = new Date();
 			Reservation newReservation = new Reservation(reservationIdSequence++, userId, reservationTime);
-			reservationRepository.save(newReservation);
+			reservationRespository.save(newReservation);
 			System.out.println("예약 완료");
 		} else {
 			System.out.println("로그인이 필요한 기능입니다.");
@@ -31,7 +31,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<Reservation> getReservationsByUserId(String userId) {
-		List<Reservation> reservations = reservationRepository.findByUserId(userId);
+		List<Reservation> reservations = reservationRespository.findByUserId(userId);
 		if (reservations.isEmpty()) {
 			System.out.println(userId + "님의 예약이 없습니다.");
 		}
@@ -40,7 +40,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public void cancelReservation(Long reservationId) {
-		reservationRepository.findById(reservationId)
+		reservationRespository.findById(reservationId)
 			.ifPresentOrElse(Reservation::cancel
 					, () -> System.out.println("해당 예약 ID의 정보를 찾을 수 없습니다."));		
 	}

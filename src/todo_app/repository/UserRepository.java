@@ -1,31 +1,36 @@
+
 package todo_app.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import todo_app.entity.User;
 
 public class UserRepository {
-    private List<User> users = new ArrayList<>();
+	List<User> users = new ArrayList<User>();
+	private static final UserRepository instance = new UserRepository();
 
-    public void save(User user) {
-        users.add(user);
-    }
+	private UserRepository() {
+	}
 
-    public User findById(String id) {
-        for (User user : users) {
-            if (user.getId().equals(id)) {
-                return user;
-            }
-        }
-        return null;
-    }
+	public static UserRepository getInstance() {
+		return instance;
+	}
 
-    public List<User> findAll() {
-        return users;
-    }
+	public void save(User user) {
+		users.add(user);
+	}
 
-    public void deleteById(String id) {
-        users.removeIf(user -> user.getId().equals(id));
-    }
+	public List<User> findAll() {
+		return users;
+	}
+
+	public Optional<User> userFindById(Long id) {
+		return users.stream().filter(user -> user.getId().equals(id)).findFirst();
+	}
+
+	public void delete(User user) {
+		users.remove(user);
+	}
 }

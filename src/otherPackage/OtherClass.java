@@ -7,10 +7,7 @@ public class OtherClass {
 	protected void otherMethod() {
 		System.out.println("다른 패키지의 메서드");
 	}
-	
 	public static void main(String[] args) {
-		PublicClass publicClass = new PublicClass();
-		System.out.println(publicClass.publicField);
-		publicClass.publicMethod();
+		
 	}
 }

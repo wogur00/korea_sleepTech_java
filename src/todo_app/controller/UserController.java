@@ -1,43 +1,18 @@
 package todo_app.controller;
 
-import java.util.Scanner;
+import todo_app.dto.request.UserSignUpRequestDto;
+import todo_app.service.UserService;
+import todo_app.service.implement.UserServiceImpl;
 
 public class UserController {
-    private UserService userService = new UserServiceImpl();
-    private Scanner scanner = new Scanner(System.in);
+	private UserService service;
 
-    public void signUp() {
-        System.out.println("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.println("Enter password: ");
-        String password = scanner.nextLine();
-        System.out.println("Enter email: ");
-        String email = scanner.nextLine();
+	public UserController() {
+		this.service = new UserServiceImpl();
+	}
 
-        UserSignUpRequestDto requestDto = new UserSignUpRequestDto(username, password, email);
-        userService.signUp(requestDto);
-        System.out.println("User signed up successfully!");
-    }
-
-    public void signIn() {
-        System.out.println("Enter username: ");
-        String username = scanner.nextLine();
-        System.out.println("Enter password: ");
-        String password = scanner.nextLine();
-
-        UserSignInRequestDto requestDto = new UserSignInRequestDto(username, password);
-        UserResponseDto response = userService.signIn(requestDto);
-        if (response != null) {
-            System.out.println("User signed in: " + response.getUsername());
-        } else {
-            System.out.println("Invalid username or password.");
-        }
-    }
-
-    public void deleteUser() {
-        System.out.println("Enter user ID to delete: ");
-        String id = scanner.nextLine();
-        userService.deleteUser(id);
-        System.out.println("User deleted successfully!");
-    }
+	public void registerUser(UserSignUpRequestDto dto) {
+		service.registerUser(dto);
+	}
+	
 }

@@ -1,30 +1,34 @@
 package todo_app.service.implement;
 
-public class TaskServiceImpl implements TaskService {
-    private TaskRepository taskRepository = new TaskRepository();
+import java.util.List;
 
-    @Override
-    public void createTask(TaskRequestDto taskRequest, String userId) {
-        Task newTask = new Task(1, taskRequest.getDescription(), taskRequest.isCompleted(), "2025-03-04", "2025-03-04", userId);
-        taskRepository.save(newTask);
-    }
+import todo_app.dto.request.TaskRequestDto;
+import todo_app.service.TaskService;
 
-    @Override
-    public void updateTask(int taskId, TaskRequestDto taskRequest) {
-        taskRepository.update(taskId, taskRequest);
-    }
+public class TaskServiceImpl implements TaskService{
 
-    @Override
-    public void deleteTask(int taskId) {
-        taskRepository.delete(taskId);
-    }
+	@Override
+	public void createTask(TaskRequestDto dto) {
+		// TODO Auto-generated method stub
+		
+	}
 
-    @Override
-    public List<TaskResponseDto> getAllTasks() {
-        List<TaskResponseDto> taskDtos = new ArrayList<>();
-        for (Task task : taskRepository.findAll()) {
-            taskDtos.add(new TaskResponseDto(task.getId(), task.getDescription(), task.isCompleted()));
-        }
-        return taskDtos;
-    }
+	@Override
+	public List<TaskRequestDto> getAllTasks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<TaskRequestDto> filterTasksBy() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteText(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

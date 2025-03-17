@@ -1,8 +1,12 @@
 package todo_app.service;
 
+import java.util.List;
+
+import todo_app.dto.request.TaskRequestDto;
+
 public interface TaskService {
-    void createTask(TaskRequestDto taskRequest, String userId);
-    void updateTask(int taskId, TaskRequestDto taskRequest);
-    void deleteTask(int taskId);
-    List<TaskResponseDto> getAllTasks();
+	void createTask(TaskRequestDto dto);
+	List<TaskRequestDto> getAllTasks();
+	List<TaskRequestDto> filterTasksBy();
+	void deleteText(Long id);
 }
